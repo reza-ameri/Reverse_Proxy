@@ -1,0 +1,27 @@
+services:
+  envoy:
+     image: envoyproxy/envoy:v1.31.0
+     container_name: envoy
+     volumes:
+       - ./envoy.yaml:/etc/envoy/envoy.yaml:ro
+       - /var/log/envoy:/var/log/envoy
+         # repo registry certs 
+       - /etc/letsencrypt/archive/repo.deployacademy.ir-0002/fullchain1.pem:/etc/envoy/certs/repo_fullchain.pem:ro
+       - /etc/letsencrypt/archive/repo.deployacademy.ir-0002/privkey1.pem:/etc/envoy/certs/repo_privkey.pem:ro
+        # pub registry certs
+       - /etc/letsencrypt/archive/pub.deployacademy.ir/fullchain1.pem:/etc/envoy/certs/pub_fullchain.pem:ro
+       - /etc/letsencrypt/archive/pub.deployacademy.ir/privkey1.pem:/etc/envoy/certs/pub_privkey.pem:ro
+     ports:
+       - "443:443"   # HTTPS exposed to public
+       - "80:80"
+     expose:
+       - "9901"
+     networks:
+       - app_net
+       - web_net
+     restart: always
+networks:
+   app_net:
+     external: true
+   web_net:
+    external: true
