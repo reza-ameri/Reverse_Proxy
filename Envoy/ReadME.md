@@ -3,6 +3,7 @@ Envoy Reverse Proxy for Nexus Repository
 This project provides an Envoy Proxy configuration to securely expose a Sonatype Nexus Repository
  through HTTPS with TLS termination, domain-based routing, and automatic HTTP → HTTPS redirection.
 
+
 Features
 
 🔒 TLS termination with support for strong cipher suites
@@ -18,6 +19,9 @@ pub.deployacademy.ir → Nexus Public (port 8082)
 📜 Access logs written to /var/log/envoy/access.log
 
 ⚙️ Admin interface on port 9901 for monitoring and troubleshooting
+
+
+
 
 Architecture
         Client
